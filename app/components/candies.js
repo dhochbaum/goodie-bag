@@ -13,15 +13,15 @@ export class DisconnectedCandies extends Component {
         const candies = this.props.candies
 
         return(
-            <div>
+            <div className='container'>
                 <main>
                     <h1>Welcome to the Goodie Bag!</h1>
                     <p>Let's take a look at all these candies!</p>
-                    <div id='candies-container'>
+                    <div id='candies-container' className='row align-items-end'>
                         {candies.map( candy => (
-                            <div className="candies-list-item" key={candy.id}>
+                            <div className="candies-list-item col-12 col-md-4" key={candy.id}>
                                 <Link to={`/candies/${candy.id}`}>
-                                    <img src={candy.imageUrl}></img>
+                                    <img src={candy.imageUrl} className="img-fluid" />
                                     <p>{candy.name}</p>
                                 </Link>
                             </div>

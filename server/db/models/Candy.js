@@ -20,7 +20,8 @@ module.exports = db.define('candy', {
   quantity: {
     type: Sequelize.INTEGER,
     validate: {
-      max: 10
+      max: 10,
+      min: 0
     }
   },
   imageUrl: {
