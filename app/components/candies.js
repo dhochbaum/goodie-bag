@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import {loadAllCandiesThunk} from '../reducers'
-//import {loadAllCandiesThunk} from '../main' WHICH ONE IS IT?
 
 export class DisconnectedCandies extends Component {
     async componentDidMount() {
@@ -22,7 +21,6 @@ export class DisconnectedCandies extends Component {
                             <div className="candies-list-item" key={candy.id}>
                                 <img src={candy.imageUrl}></img>
                                 <p>{candy.name}</p>
-                                <p>{candy.description}</p>
                             </div>
                         ))}
                     </div>

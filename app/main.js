@@ -9,8 +9,7 @@ import Root from './components/root'
 import Navbar from './components/navbar'
 import {Candies} from './components/candies'
 import {DisconnectedCandies} from './components/candies'
-
-console.log(Candies)
+import {Candy} from './components/candy'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -18,8 +17,10 @@ ReactDOM.render(
       <div>
         <Navbar />
 
+        <Route path='/candies/:id' component={Candy} />
         <Route exact path='/' component={Root} />
         <Route exact path='/candies' component={Candies} />
+        
       </div>
 
       
