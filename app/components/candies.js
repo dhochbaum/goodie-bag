@@ -5,16 +5,30 @@ import {loadAllCandiesThunk} from '../reducers'
 //import {loadAllCandiesThunk} from '../main' WHICH ONE IS IT?
 
 export class DisconnectedCandies extends Component {
-    componentDidMount() {
+    async componentDidMount() {
         this.props.loadAllCandies();
     }
 
     render() {
-        console.log(this.props)
+        const candies = this.props.candies
+
         return(
-            <div id='candies-container'>
-                CANDIES GO HERE
+            <div>
+                <main>
+                    <h1>Welcome to the Goodie Bag!</h1>
+                    <p>Let's take a look at all these candies!</p>
+                    <div id='candies-container'>
+                        {candies.map( candy => (
+                            <div className="candies-list-item" key={candy.id}>
+                                <img src={candy.imageUrl}></img>
+                                <p>{candy.name}</p>
+                                <p>{candy.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </main>
             </div>
+
         )
     }
 }
