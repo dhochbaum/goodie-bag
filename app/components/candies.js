@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import {Link} from 'react-router-dom'
 
 import {loadAllCandiesThunk} from '../reducers'
 
@@ -19,8 +20,10 @@ export class DisconnectedCandies extends Component {
                     <div id='candies-container'>
                         {candies.map( candy => (
                             <div className="candies-list-item" key={candy.id}>
-                                <img src={candy.imageUrl}></img>
-                                <p>{candy.name}</p>
+                                <Link to={`/candies/${candy.id}`}>
+                                    <img src={candy.imageUrl}></img>
+                                    <p>{candy.name}</p>
+                                </Link>
                             </div>
                         ))}
                     </div>
