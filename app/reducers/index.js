@@ -5,6 +5,7 @@ import { get } from 'https';
 // Action Types
 const LOAD_ALL_CANDIES = 'LOAD_ALL_CANDIES'
 const LOAD_ONE_CANDY = 'LOAD_ONE_CANDY'
+const CHANGE_CANDY_QUANTITY = 'CHANGE_CANDY_QUANTITY'
 
 // Action Creators
 export const loadAllCandies = (candies) => ({
@@ -14,6 +15,11 @@ export const loadAllCandies = (candies) => ({
 
 export const loadOneCandy = (candy) => ({
   type: LOAD_ONE_CANDY,
+  candy
+})
+
+export const changeCandyQuantity = (candy) => ({
+  type: CHANGE_CANDY_QUANTITY,
   candy
 })
 
@@ -40,6 +46,19 @@ export const loadOneCandyThunk = (id) => {
   }
 }
 
+export const changeCandyQuantityThunk = (id, change) => {
+  return async dispatch => {
+      try {
+        let itemToUpdate = await axios.get('/api/candies/' + id)
+        itemToUpdate.data.quantity += change
+        const { data } = await axios.put(`/api/candies/${id}`, itemToUpdate.data)
+        console.log(data)
+        dispatch(changeCandyQuantity(data.candy))
+      } catch (err) {
+        console.log('Error updating candy quantity', err)
+      }
+  }
+}
 
 
 
@@ -55,6 +74,12 @@ const rootReducer = (state = initialState, action) => {
     }
     case LOAD_ONE_CANDY: {
       //const updatedCandies = [...state.candies].filter(candy => candy.id!==action.candy.id).concat([action.candy]);
+      return {
+        ...state,
+        selectedCandy: action.candy
+      }
+    }
+    case CHANGE_CANDY_QUANTITY: {
       return {
         ...state,
         selectedCandy: action.candy

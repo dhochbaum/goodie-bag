@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import {loadOneCandyThunk} from '../reducers'
+import {loadOneCandyThunk, changeCandyQuantityThunk } from '../reducers'
 
 export class DisconnectedCandy extends Component {
     async componentDidMount() {
@@ -22,6 +22,12 @@ export class DisconnectedCandy extends Component {
                                 <img src={selectedCandy.imageUrl}></img>
                                 <p>{selectedCandy.name}</p>
                                 <p>Quantity: {selectedCandy.quantity}</p>
+                                <button onClick={() => {
+                                    this.props.increaseCandyQuantity(selectedCandy.id)
+                                }}>Add Candy</button>
+                                <button onClick={() => {
+                                    this.props.decreaseCandyQuantity(selectedCandy.id)
+                                }}>Remove Candy</button>
                                 <p>{selectedCandy.description}</p>
                             </div>
                     </div>
@@ -40,7 +46,9 @@ const mapsStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, id) => {
     return {
-        loadOneCandy: (id) => dispatch(loadOneCandyThunk(id))
+        loadOneCandy: (id) => dispatch(loadOneCandyThunk(id)),
+        increaseCandyQuantity: (id) => dispatch(changeCandyQuantityThunk(id, 1)),
+        decreaseCandyQuantity: (id) => dispatch(changeCandyQuantityThunk(id, -1))
     }
 }
 
